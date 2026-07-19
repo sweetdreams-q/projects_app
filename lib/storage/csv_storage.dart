@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CsvStorage {
@@ -32,9 +33,23 @@ class CsvStorage {
   }
 
   Future<File> _fileFor(String fileName) async {
-    final directory = directoryProvider != null
-        ? await directoryProvider!()
-        : await getApplicationDocumentsDirectory();
+    final directory = await _resolveDirectory();
     return File('${directory.path}${Platform.pathSeparator}$fileName');
+  }
+
+  Future<Directory> _resolveDirectory() async {
+    if (directoryProvider != null) {
+      return directoryProvider!();
+    }
+
+    try {
+      return await getApplicationDocumentsDirectory();
+    } on MissingPluginException {
+      final fallbackDirectory = Directory('${Directory.current.path}${Platform.pathSeparator}data');
+      if (!await fallbackDirectory.exists()) {
+        await fallbackDirectory.create(recursive: true);
+      }
+      return fallbackDirectory;
+    }
   }
 }
