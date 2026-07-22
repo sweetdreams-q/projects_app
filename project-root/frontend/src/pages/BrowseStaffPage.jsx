@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Stack, Typography } from '@mui/material';
 
-import StaffCard from '../components/StaffCard';
+import StaffProfileCard from '../components/StaffProfileCard';
 import { staffData } from '../data/staffData';
 
 export default function BrowseStaffPage() {
@@ -17,7 +17,7 @@ export default function BrowseStaffPage() {
       <Grid container spacing={3}>
         {staffData.map((staff) => (
           <Grid item xs={12} sm={6} lg={4} key={staff.id}>
-            <StaffCard staff={staff} />
+            <StaffProfileCard staff={staff} />
           </Grid>
         ))}
       </Grid>
