@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "cors": "latest",
+    "csv-parser": "latest",
+    "csv-writer": "latest",
+    "dotenv": "latest",
+    "express": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}
